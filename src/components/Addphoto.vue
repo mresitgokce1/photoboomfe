@@ -28,19 +28,20 @@ export default {
   methods : {
     save(){
 
-      let photo = {
-        Title:this.model_title,
-        Tags:this.model_tags,
-        Photos:this.selectedImage
-      }
+      let formData = new FormData();
+      formData.append('Photos',this.selectedImage);
+      formData.append('Title',this.model_title);
+      formData.append('Tags',this.model_tags);
 
-      axios.post("http://localhost:34851/api/photos", photo)
+      axios.post("http://localhost:34851/api/photos", formData, {'Content-Type': 'multipart/form-data'})
       .then(response => {
         console.log(response)
       })
+      
+      this.$router.push({ path: '/myphotos' })
     },
     onImageSelected(event){
-        this.selectedImage = event.target.files[0].name
+        this.selectedImage = event.target.files[0]
     }
   }
 }

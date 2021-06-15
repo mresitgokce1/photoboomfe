@@ -13,6 +13,7 @@
 
 <script>
 import axios from "axios"
+
 export default {
   name: 'Detailphoto',
   data(){
@@ -23,26 +24,26 @@ export default {
   },
   methods : {
     get(){
-      axios.get("http://localhost:34851/api/photos/"+this.id)
-        .then(response => {
+          axios.get("http://localhost:34851/api/photos/"+this.id)
+          .then(response => {
           this.photo = response.data
         })
-    }
     },
-     mounted()
-  {
-      this.get()
-  },
     remove()
     {
-      let id = 5;
-
-      axios.delete("http://localhost:34851/api/photos/"+id)
-      .then(response => {
-        console.log(response)
+          axios.delete("http://localhost:34851/api/photos/"+this.id)
+          .then(response => {
+          console.log(response)
+          this.$router.push({ path: '/myphotos' })
       })
-
     }
+    },
+    
+    mounted()
+    {
+        this.get()
+    },
+    
   }
 </script>
 
