@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h3 class="text-center mt-5">{{photo.title}}</h3>
-        <p class="text-center mt-5">Tags: {{photo.tags}}</p>
-        <p class="text-center mt-5">Photo URL:{{photo.photos}}</p>
+        <p class="text-center mt-1"><b>Tags:</b> {{photo.tags}}</p>
+        <p class="text-center mt-1"><img v-bind:src="getImageUrl()+photo.photos" class="w-100 shadow-1-strong rounded mb-4"></p>
 
         <div >
             <button @click="remove" class="form-control mt-3 btn btn-danger">Delete photo</button> 
@@ -28,6 +28,10 @@ export default {
           .then(response => {
           this.photo = response.data
         })
+    },
+    getImageUrl()
+    {
+      return "http://localhost:34851/images/"
     },
     remove()
     {
